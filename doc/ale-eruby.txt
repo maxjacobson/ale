@@ -1,12 +1,13 @@
 ===============================================================================
 ALE Eruby Integration                                       *ale-eruby-options*
 
-There are four linters for `eruby` files:
+There are several linters for `eruby` files:
 
 - `erb`
 - `erblint`
-- `erubis`
 - `erubi`
+- `erubis`
+- `herb`
 - `htmlbeautifier`
 - `ruumba`
 
@@ -29,6 +30,68 @@ g:ale_eruby_erbformatter_executable
 
   Override the invoked erb-formatter binary. This is useful for running
   erb-formatter from binstubs or a bundle.
+
+
+===============================================================================
+herb                                                           *ale-eruby-herb*
+
+Herb Lint (herb-lint) and Herb Format (herb-format) can be installed from
+https://herb-tools.dev/
+
+Herb tools are installed via npm and should be used only on .html.erb files
+(the extension is a pun on "HTML ERB").
+
+
+herb-lint                                                 *ale-eruby-herb-lint*
+
+                                              *ale-options.eruby_herb_executable*
+                                                    *g:ale_eruby_herb_executable*
+                                                    *b:ale_eruby_herb_executable*
+eruby_herb_executable
+g:ale_eruby_herb_executable
+  Type: |String|
+  Default: `'herb-lint'`
+
+  Override the invoked herb-lint binary. This is useful for running herb-lint
+  from binstubs or a bundle. This variable will be ignored if the
+  g:ale_eruby_herb_use_global variable is set to 0 and a local node_modules
+  installation is found.
+
+                                                 *ale-options.eruby_herb_options*
+                                                       *g:ale_eruby_herb_options*
+                                                        *b:ale_eruby_herb_options*
+eruby_herb_options
+g:ale_eruby_herb_options
+  Type: |String|
+  Default: `''`
+
+  This variable can be change to modify flags given to herb-lint.
+
+
+herb-format                                             *ale-eruby-herb-format*
+
+                                         *ale-options.eruby_herb_format_executable*
+                                               *g:ale_eruby_herb_format_executable*
+                                               *b:ale_eruby_herb_format_executable*
+eruby_herb_format_executable
+g:ale_eruby_herb_format_executable
+  Type: |String|
+  Default: `'herb-format'`
+
+  Override the invoked herb-format binary. This is useful for running
+  herb-format from binstubs or a bundle. This variable will be ignored if the
+  g:ale_eruby_herb_format_use_global variable is set to 0 and a local node_modules
+  installation is found.
+
+                                         *ale-options.eruby_herb_format_options*
+                                               *g:ale_eruby_herb_format_options*
+                                                *b:ale_eruby_herb_format_options*
+eruby_herb_format_options
+g:ale_eruby_herb_format_options
+  Type: |String|
+  Default: `''`
+
+  This variable can be change to modify flags given to herb-format.
 
 
 ===============================================================================

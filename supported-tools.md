@@ -202,6 +202,8 @@ formatting.
   * [erblint](https://github.com/Shopify/erb-lint)
   * [erubi](https://github.com/jeremyevans/erubi)
   * [erubis](https://github.com/kwatch/erubis)
+  * [herb-format](https://herb-tools.dev/) :floppy_disk:
+  * [herb-lint](https://herb-tools.dev/)
   * [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier)
   * [ruumba](https://github.com/ericqweinstein/ruumba)
 * Erlang

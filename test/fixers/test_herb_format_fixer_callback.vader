@@ -1,0 +1,37 @@
+Before:
+  Save g:ale_eruby_herb_format_executable
+  Save g:ale_eruby_herb_format_options
+
+  " Use an invalid global executable, so we don't match it.
+  let g:ale_eruby_herb_format_executable = 'xxxinvalid'
+  let g:ale_eruby_herb_format_options = ''
+
+  call ale#test#SetDirectory('/testplugin/test/fixers')
+
+After:
+  Restore
+
+  call ale#test#RestoreDirectory()
+
+Execute(The herb-format callback should return the correct default values):
+  call ale#test#SetFilename('../test-files/eruby/dummy.html.erb')
+
+  AssertEqual
+  \ {
+  \   'read_temporary_file': 1,
+  \   'command': ale#Escape(g:ale_eruby_herb_format_executable)
+  \     . ' %t',
+  \ },
+  \ ale#fixers#herb_format#Fix(bufnr(''))
+
+Execute(The herb-format callback should include custom herb-format options):
+  let g:ale_eruby_herb_format_options = '--check'
+  call ale#test#SetFilename('../test-files/eruby/dummy.html.erb')
+
+  AssertEqual
+  \ {
+  \   'read_temporary_file': 1,
+  \   'command': ale#Escape(g:ale_eruby_herb_format_executable)
+  \     . ' --check %t',
+  \ },
+  \ ale#fixers#herb_format#Fix(bufnr(''))

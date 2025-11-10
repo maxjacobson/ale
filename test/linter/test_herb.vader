@@ -1,0 +1,22 @@
+Before:
+  call ale#assert#SetUpLinterTest('eruby', 'herb')
+  call ale#test#SetFilename('dummy.html.erb')
+
+After:
+  call ale#assert#TearDownLinterTest()
+
+Execute(Should use node_modules/.bin/herb-lint by default):
+  AssertLinter 'herb-lint', ale#Escape('herb-lint')
+  \   . ' --format json %s'
+
+Execute(Should allow executable to be configured):
+  let g:ale_eruby_herb_executable = 'bin/herb-lint'
+
+  AssertLinter 'bin/herb-lint', ale#Escape('bin/herb-lint')
+  \   . ' --format json %s'
+
+Execute(Should allow options to be configured):
+  let g:ale_eruby_herb_options = '--check'
+
+  AssertLinter 'herb-lint', ale#Escape('herb-lint')
+  \   . ' --format json --check %s'

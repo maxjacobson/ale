@@ -1,0 +1,51 @@
+Before:
+  call ale#linter#Reset()
+  runtime ale_linters/eruby/herb.vim
+
+After:
+  call ale#linter#Reset()
+
+Execute(The herb handler should parse JSON output correctly):
+  AssertEqual
+  \ [
+  \   {
+  \     'lnum': 12,
+  \     'col': 20,
+  \     'end_col': 64,
+  \     'end_lnum': 12,
+  \     'text': 'Attribute `href` uses single quotes. Prefer double quotes for HTML attribute values: `href="javascript:<%= @autofill_bookmarklet_js %>"`',
+  \     'code': 'html-attribute-double-quotes',
+  \     'type': 'W',
+  \   },
+  \ ],
+  \ ale_linters#eruby#herb#Handle(347, [
+  \     '{"offenses":[{"filename":"app/views/staff/bookmarklets/show.html.erb","message":"Attribute `href` uses single quotes. Prefer double quotes for HTML attribute values: `href=\"javascript:<%= @autofill_bookmarklet_js %>\"`","location":{"start":{"line":12,"column":20},"end":{"line":12,"column":64}},"severity":"warning","code":"html-attribute-double-quotes","source":"Herb Linter"}],"summary":{"filesChecked":1,"filesWithOffenses":1,"totalErrors":0,"totalWarnings":1,"totalOffenses":1,"ruleCount":33},"timing":{"startTime":"2025-11-10T18:22:17.676Z","duration":20},"completed":true,"clean":false,"message":null}'
+  \ ])
+
+Execute(The herb handler should handle errors):
+  AssertEqual
+  \ [
+  \   {
+  \     'lnum': 5,
+  \     'col': 10,
+  \     'end_col': 15,
+  \     'end_lnum': 5,
+  \     'text': 'Malformed HTML tag',
+  \     'code': 'malformed-tag',
+  \     'type': 'E',
+  \   },
+  \ ],
+  \ ale_linters#eruby#herb#Handle(347, [
+  \     '{"offenses":[{"filename":"test.html.erb","message":"Malformed HTML tag","location":{"start":{"line":5,"column":10},"end":{"line":5,"column":15}},"severity":"error","code":"malformed-tag","source":"Herb Linter"}],"summary":{"filesChecked":1,"filesWithOffenses":1,"totalErrors":1,"totalWarnings":0,"totalOffenses":1,"ruleCount":33},"timing":{"startTime":"2025-11-10T18:22:17.676Z","duration":20},"completed":true,"clean":false,"message":null}'
+  \ ])
+
+Execute(The herb handler should handle no offenses):
+  AssertEqual
+  \ [],
+  \ ale_linters#eruby#herb#Handle(347, [
+  \     '{"offenses":[],"summary":{"filesChecked":1,"filesWithOffenses":0,"totalErrors":0,"totalWarnings":0,"totalOffenses":0,"ruleCount":33},"timing":{"startTime":"2025-11-10T18:22:17.676Z","duration":10},"completed":true,"clean":true,"message":null}'
+  \ ])
+
+Execute(The herb handler should handle empty output):
+  AssertEqual [], ale_linters#eruby#herb#Handle(347, ['{}'])
+  AssertEqual [], ale_linters#eruby#herb#Handle(347, [])

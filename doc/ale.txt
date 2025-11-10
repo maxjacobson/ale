@@ -3504,6 +3504,9 @@ documented in additional help files.
     syntaxerl.............................|ale-erlang-syntaxerl|
   eruby...................................|ale-eruby-options|
     erb-formatter.........................|ale-eruby-erbformatter|
+    herb...................................|ale-eruby-herb|
+    herb-lint..............................|ale-eruby-herb-lint|
+    herb-format...........................|ale-eruby-herb-format|
     erblint...............................|ale-eruby-erblint|
     htmlbeautifier........................|ale-eruby-htmlbeautifier|
     ruumba................................|ale-eruby-ruumba|

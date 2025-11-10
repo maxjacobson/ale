@@ -192,6 +192,8 @@ Notes:
   * `erblint`
   * `erubi`
   * `erubis`
+  * `herb-format`!!
+  * `herb-lint`
   * `htmlbeautifier`
   * `ruumba`
 * Erlang
